@@ -1,8 +1,9 @@
 id: org.freedesktop.Platform.VulkanLayer.lsfgvk
-branch: '24.08'
+
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
+branch: '24.08'
 build-extension: true
 
 sdk-extensions:
@@ -10,6 +11,8 @@ sdk-extensions:
 
 build-options:
   prefix: /usr/lib/extensions/vulkan/lsfgvk
+  append-path: /usr/lib/sdk/llvm20/bin
+  prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
 
 modules:
   - name: lsfg-vk
@@ -19,12 +22,13 @@ modules:
       prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_C_COMPILER=clang
+      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
       - -DCMAKE_CXX_COMPILER=clang++
-      - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=On
+      - -DLSFGVK_BUILD_LAYER=ON
+      - -DLSFGVK_BUILD_UI=OFF
+      - -DLSFGVK_BUILD_CLI=OFF
+      - -DLSFGVK_LAYER_LIBRARY_PATH=/usr/lib/extensions/vulkan/lsfgvk/lib/liblsfg-vk-layer.so
     sources:
       - type: git
-        url: https://github.com/PancakeTAS/lsfg-vk.git
-        commit: 7113d7d02da9fc9df5cb3b03230d1f7de86f7056 # 1.0.0
-      - type: patch
-        path: VkLayer_LS_frame_generation.patch
+        url: https://git.lsfg-vk.dev/lsfg-vk.git
+        commit: 2333707d55b68ddd8066fd95404c3b7d07e00d3a # 2.0.0
