@@ -1,25 +1,25 @@
 id: org.freedesktop.Platform.VulkanLayer.lsfgvk
 
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '26.08'
 sdk: org.freedesktop.Sdk
-branch: '24.08'
+branch: '26.08'
 build-extension: true
 
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm20
+  - org.freedesktop.Sdk.Extension.llvm22
 
 build-options:
   prefix: /usr/lib/extensions/vulkan/lsfgvk
-  append-path: /usr/lib/sdk/llvm20/bin
-  prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+  append-path: /usr/lib/sdk/llvm22/bin
+  prepend-ld-library-path: /usr/lib/sdk/llvm22/lib
 
 modules:
   - name: lsfg-vk
     buildsystem: cmake-ninja
     build-options:
-      append-path: /usr/lib/sdk/llvm20/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+      append-path: /usr/lib/sdk/llvm22/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm22/lib
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
